@@ -61,12 +61,12 @@ console.log(recursiveMultiplier([1,2,3,4], 5));
 
 //6. Write a function 'recursiveReverse' that takes an array and uses recursion to return its contents in reverse
 
-function recursiveReverse(str){
-  if(str.length === 1){
-    return str;
+function recursiveReverse(arr){
+  if(arr.length === 1){
+    return arr[0];
   }else{
-    return str.slice(str.length-1).concat(recursiveReverse(str.slice(0,str.length-1)));
+    return arr.slice(arr.length-1).concat(recursiveReverse(arr.slice(0,arr.length-1)));
   }
 }
 
-console.log(recursiveReverse('abcdefg'));
+console.log(recursiveReverse([1,2,3,4]));
