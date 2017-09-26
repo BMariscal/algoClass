@@ -51,7 +51,7 @@ What's the time complexity?
 //cannot use an array
 function Stack(capacity) {
   // implement me...
-  this.capacity = capacity;
+  this.capacity = capacity || Infinity;
   this.storage = {};
   this.min = undefined;
   this.counter = 0;

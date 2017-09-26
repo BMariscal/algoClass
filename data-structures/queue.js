@@ -44,34 +44,70 @@ queue values - (first)2-5-7-3-6-9(last)
 myQueue.until(7)
 => 3
 What's the time complexity?
-
-
-
-
  */
 
 function Queue(capacity) {
-  // implement me...
+  this.storage = {};
+  this.capacity = capacity || Infinity;
+  this.counter = 0;
+  this.minpop = 0;
+  this.minpeek = 0;
 }
-
+//O(1)
 Queue.prototype.enqueue = function(value) {
-  // implement me...
+  if(this.counter < this.capacity) {
+    this.storage[this.counter] = value;
+    this.counter++;
+  }else{
+    console.log("Max capacity already reached. Remove element before adding a new one.");
+  }
 };
-// Time complexity:
-
+//O(1)
 Queue.prototype.dequeue = function() {
-  // implement me...
+  const removedItem = this.storage[this.minpop];
+  delete this.storage[this.minpop];
+  this.minpop++;
+  this.minpeek++;
+  return removedItem;
 };
-// Time complexity:
 
+//O(1)
 Queue.prototype.peek = function() {
-  // implement me...
+  return this.storage[this.minpeek];
 };
 
+//O(1)
 Queue.prototype.count = function() {
-  // implement me...
+  return this.counter;
 };
-// Time complexity:
+
+
+Queue.prototype.contains = function(findme) {
+  return Object.values(this.storage).includes(findme);
+};
+//O(n)
+Queue.prototype.until = function(target) {
+  let counted =0;
+  for(let key in this.storage){
+    counted++;
+    if(this.storage[key] === target){
+      return counted;
+    }
+  }
+  return -1;
+};
+
+let myQueue = new Queue();
+myQueue.enqueue(2);
+myQueue.enqueue(4);
+myQueue.enqueue(6);
+myQueue.enqueue(7);
+console.log(myQueue.peek())
+console.log(myQueue.storage)
+console.log(myQueue.contains(1))
+console.log(myQueue.until(6))
+
+
 
 
 
