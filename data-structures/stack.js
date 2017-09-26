@@ -45,46 +45,114 @@ stack values - (first)2-5-7-3-6-9(last)
 myStack.until(7)
 => 4
 What's the time complexity?
-
-
-
  */
 
+
+//cannot use an array
 function Stack(capacity) {
   // implement me...
+  this.capacity = capacity;
+  this.storage = {};
+  this.min = undefined;
+  this.counter = 0;
 }
 
+//O(1)
 Stack.prototype.push = function(value) {
   // implement me...
+  if(this.count() >= this.capacity){
+    console.log("Max capacity already reached. Remove element before adding a new one.");
+  }else{
+    if(value < this.min){
+      this.min = value;
+    }else if(this.count() === 0){
+      this.min = value;
+    }
+    this.counter++;
+    this.storage[this.count()] = value;
+  }
 };
-// Time complexity:
 
+//O(1)
 Stack.prototype.pop = function() {
   // implement me...
+  const lastElement = this.storage[this.count()-1];
+  delete this.storage[this.count()-1];
+  return lastElement;
 };
-// Time complexity:
 
+//O(1)
 Stack.prototype.peek = function() {
   // implement me...
+  return this.storage[this.count()-1];
 };
-// Time complexity:
 
+//O(1)
 Stack.prototype.count = function() {
   // implement me...
+  return this.counter;
 };
-// Time complexity:
 
+Stack.prototype.contains = function(findme){
+  return Object.values(this.storage).includes(findme);
+};
+
+//O(n)
+Stack.prototype.until = function(num){
+  let counter = 0;
+  let idx = this.count()+1;
+  Object.keys(this.storage).forEach(key=> {
+    if (this.storage[key] === String(num)){
+      idx = counter;
+    }else{
+      counter++;
+    }
+    });
+  return this.count()- idx;
+  };
 
 /*
 *** Exercises:
 
 1. Implement a stack with a min method which returns the minimum element currently in the stack. This method should have O(1) time complexity. Make sure your implementation handles duplicates.
+*/
+ //O(1)
+ Stack.prototype.minElement = function(){
+ return this.min;
+ };
 
-2. Sort a stack so that its elements are in ascending order.
+/*2. Sort a stack so that its elements are in ascending order.*/
+ Stack.prototype.sort = function(){
+ let newObj = {};
+ let entries = Object.entries(this.storage);
+ entries.sort((a,b)=> a[1]-b[1]);
+ entries.forEach((item, idx)=> newObj[idx] = item[1]);
+ return newObj;
+ };
 
+ let myStack = new Stack();
+ myStack.push(7);
+ myStack.push(5);
+ myStack.push(6);
+ myStack.push(2);
+ myStack.push(10);
+ console.log(myStack.count());
+ console.log(myStack.minElement());
+ console.log(myStack.sort());
+/*
 3. Given a string, determine if the parenthesis in the string are balanced.
 Ex: balancedParens( 'sqrt(5*(3+8)/(4-2))' ) => true
-Ex: balancedParens( 'Math.min(5,(6-3))(' ) => false
+Ex: balancedParens( 'Math.min(5,(6-3))(' ) => false*/
+
+function balancedParens(str){
+  const matchLeftParens = str.match(/\(/g).length;
+  const matchRightParens = str.match(/\)/g).length;
+  return matchLeftParens === matchRightParens;
+}
+console.log(balancedParens( 'sqrt(5*(3+8)/(4-2))' ) === true)
+console.log(balancedParens( 'Math.min(5,(6-3))(' ) === false)
+
+/*
 
 4. Towers of Hanoi - https://en.wikipedia.org/wiki/Tower_of_Hanoi
 You are given three towers (stacks) and N disks, each of different size. You can move the disks according to three constraints:
@@ -93,3 +161,9 @@ You are given three towers (stacks) and N disks, each of different size. You can
    3. no disk can be placed on top of a disk that is smaller than it
 The disks begin on tower#1. Write a function that will move the disks from tower#1 to tower#3 in such a way that none of the constraints are violated.
  */
+
+
+
+
+
+
