@@ -68,8 +68,8 @@ Stack.prototype.push = function(value) {
     }else if(this.count() === 0){
       this.min = value;
     }
-    this.counter++;
     this.storage[this.count()] = value;
+    this.counter++;
   }
 };
 
@@ -139,6 +139,9 @@ Stack.prototype.until = function(num){
  console.log(myStack.count());
  console.log(myStack.minElement());
  console.log(myStack.sort());
+
+
+
 /*
 3. Given a string, determine if the parenthesis in the string are balanced.
 Ex: balancedParens( 'sqrt(5*(3+8)/(4-2))' ) => true

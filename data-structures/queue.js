@@ -46,6 +46,7 @@ myQueue.until(7)
 What's the time complexity?
  */
 
+
 function Queue(capacity) {
   this.storage = {};
   this.capacity = capacity || Infinity;
@@ -56,8 +57,7 @@ function Queue(capacity) {
 //O(1)
 Queue.prototype.enqueue = function(value) {
   if(this.counter < this.capacity) {
-    this.storage[this.counter] = value;
-    this.counter++;
+    this.storage[this.counter++] = value;
   }else{
     console.log("Max capacity already reached. Remove element before adding a new one.");
   }
@@ -65,8 +65,7 @@ Queue.prototype.enqueue = function(value) {
 //O(1)
 Queue.prototype.dequeue = function() {
   const removedItem = this.storage[this.minpop];
-  delete this.storage[this.minpop];
-  this.minpop++;
+  delete this.storage[this.minpop++];
   this.minpeek++;
   return removedItem;
 };
@@ -102,10 +101,10 @@ myQueue.enqueue(2);
 myQueue.enqueue(4);
 myQueue.enqueue(6);
 myQueue.enqueue(7);
-console.log(myQueue.peek())
-console.log(myQueue.storage)
-console.log(myQueue.contains(1))
-console.log(myQueue.until(6))
+console.log(myQueue.peek());
+console.log(myQueue.storage);
+console.log(myQueue.contains(1));
+console.log(myQueue.until(6));
 
 
 
@@ -122,3 +121,4 @@ console.log(myQueue.until(6))
 
 
  */
+
