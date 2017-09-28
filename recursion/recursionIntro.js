@@ -48,7 +48,7 @@ function recursiveMultiplier(arr,num){
   let newarr = [];
   function map(arr) {
     if (arr.length === 0) {
-      return;
+      return arr;
     } else {
       newarr.unshift(num * arr.slice(arr.length - 1));
       map(arr.slice(0, arr.length - 1));

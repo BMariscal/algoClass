@@ -106,14 +106,60 @@ console.log(myQueue.storage);
 console.log(myQueue.contains(1));
 console.log(myQueue.until(6));
 
+/*******stack*********/
+function Stack(capacity) {
+  // implement me...
+  this.capacity = capacity || Infinity;
+  this.storage = {};
+  this.min = undefined;
+  this.counter = 0;
+}
 
+//O(1)
+Stack.prototype.push = function(value) {
+  // implement me...
+  if(this.count() >= this.capacity){
+    console.log("Max capacity already reached. Remove element before adding a new one.");
+  }else{
+    if(value < this.min){
+      this.min = value;
+    }else if(this.count() === 0){
+      this.min = value;
+    }
+    this.storage[this.count()] = value;
+    this.counter++;
+  }
+};
 
+//O(1)
+Stack.prototype.pop = function() {
+  // implement me...
+  const lastElement = this.storage[this.count()-1];
+  delete this.storage[this.count()-1];
+  return lastElement;
+};
 
+//O(1)
+Stack.prototype.peek = function() {
+  // implement me...
+  return this.storage[this.count()-1];
+};
+
+//O(1)
+Stack.prototype.count = function() {
+  // implement me...
+  return this.counter;
+};
+
+/**************************************
 
 /*
 *** Exercises:
 
-1. Implement a queue using two stacks.
+1. Implement a queue using two stacks.*/
+
+
+/*
 
 2. Implement a double-ended queue, with the following methods: enqueueLeft, dequeueLeft, enqueueRight, dequeueRight.
 
