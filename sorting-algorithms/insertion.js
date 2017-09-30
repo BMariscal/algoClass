@@ -29,3 +29,21 @@ now repeat for next unsorted element
 (https://en.wikipedia.org/wiki/Shellsort)
 
 */
+//O(n^2)
+ function insertionSort(array) {
+  for(let i =1; i < array.length; i++){
+    insert(array,i-1,array[i]);
+  }
+  return array;
+};
+
+
+function insert(array, rightIndex, value) {
+  let j;
+  for(j = rightIndex;j >= 0 && array[j] > value; j--) {
+    array[j + 1] = array[j];
+  }
+  array[j + 1] = value;
+};
+
+console.log(insertionSort([0,1,2,6,7,9,12,5,3,-3,-22,18]));

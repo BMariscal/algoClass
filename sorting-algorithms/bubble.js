@@ -19,3 +19,18 @@ Variants:
 (https://en.wikipedia.org/wiki/Cocktail_sort)
 
 */
+//O(n^2)
+function bubbleSort(array){
+  for (let i = array.length-1; i>=0; i--){
+    for(let j = 1; j<=i; j++){
+      if(array[j-1]>array[j]){
+        let temp = array[j-1];
+        array[j-1] = array[j];
+        array[j] = temp;
+      }
+    }
+  }
+  return array;
+}
+
+console.log(bubbleSort([7,5,12,4,3,2,9])); //[2, 3, 4, 5, 7, 9,12]

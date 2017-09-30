@@ -43,29 +43,32 @@ function binarySearch(array,value){
   }
   return null;
 }
-const sortedArr = [1,2,3,4,5,6,7,8,9,10];
+const sortedArr = [0,1,2,3,4,5,6,7,8,9,10];
 const result = binarySearch(sortedArr,9);
-console.log(result);
+console.log(result)//9;
 
 //recursive implementation:
 
-function recursiveBinarySearch(array,value,high,low){
-  let midpoint = Math.floor((high + low) /2);
-  if(array[midpoint] === value){
+var recursiveBinarySearch = function(array, target, min, max) {
+  min = min || 0;
+  max = max || array.length;
+  let midpoint = Math.floor((max + min) /2);
+
+  if(array[midpoint] === target){
     return midpoint;
   }
-  else if(high < low){
+  if (midpoint === min){
     return null;
   }
-  else if(array[midpoint] > value){
-    high = midpoint -1;
-    return recursiveBinarySearch(array,value,high,low);
+  else if(array[midpoint] > target){
+    max = midpoint;
   }
-  else if(array[midpoint] < value){
-    low = midpoint +1;
-    return recursiveBinarySearch(array,value,high,low);
+  else if(array[midpoint] < target){
+    min = midpoint;
   }
-}
+  return recursiveBinarySearch(array,target,min, max);
+};
+
 const sortedArr2 = [1,2,3,4,5,6,7];
-const result2 = recursiveBinarySearch(sortedArr2,8, sortedArr2.length-1, 0);
+const result2 = recursiveBinarySearch(sortedArr2,6)//5;
 console.log(result2);
